@@ -21,29 +21,34 @@ const LIVROS_SCHEMA = `
     CREATE TABLE IF NOT EXISTS livros (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         titulo TEXT NOT NULL,
-        descricao TEXT DEFAULT ('') NOT NULL,
-        url TEXT NOT NULL
+        preco INTEGER NOT NULL,
+        descricao TEXT DEFAULT ('') NOT NULL
     );
 `;
 
 const INSERIR_LIVRO_1 = `
     INSERT INTO livros (
         titulo,
-        descricao,
-        url
-    ) SELECT 'Node na prática', 'Como desenvolver com Node.', '' WHERE NOT EXISTS (SELECT * FROM livros WHERE titulo = 'Node na prática')
+        preco,
+        descricao
+    ) SELECT 'Node na prática', 100,'Como desenvolver com Node.' WHERE NOT EXISTS (SELECT * FROM livros WHERE titulo = 'Node na prática')
 `;
 
 const INSERIR_LIVRO_2 = `
     INSERT INTO livros (
         titulo,
-        descricao,
-        url
-    ) SELECT 'JavaScript na prática', 'Como desenvolver com JavaScript.', '' WHERE NOT EXISTS (SELECT * FROM livros WHERE titulo = 'JavaScript na prática')
+        preco,
+        descricao
+    ) SELECT 'JavaScript na prática',100, 'Como desenvolver com JavaScript.' WHERE NOT EXISTS (SELECT * FROM livros WHERE titulo = 'JavaScript na prática')
 `;
+
+const CLEAR = `
+    DROP TABLE livros;
+`
 
 bd.serialize(() => {
     bd.run("PRAGMA foreign_keys=ON");
+    //bd.run(CLEAR);
     bd.run(USUARIOS_SCHEMA);
     bd.run(INSERIR_USUARIO_1);
     bd.run(LIVROS_SCHEMA);

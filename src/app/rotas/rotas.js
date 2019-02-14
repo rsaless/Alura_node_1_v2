@@ -22,5 +22,16 @@ module.exports = (app) => {
             .then(livros => res.marko(require('../views/livros/lista/lista.marko'),{livros}))
             .catch(erro => console.log(erro));
     });
+
+    app.get('/livros/form', (req, res) => {
+        res.marko(require('../views/livros/form/form.marko'));
+    });
+
+    app.post('/livros', (req,res) => {
+        console.log(req.body);
+        new LivroDao(db).adiciona(req.body)
+            .then(res.redirect('/livros'))
+            .catch(erro => console.log(erro));
+    })
 }
 

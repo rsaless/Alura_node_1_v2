@@ -3,7 +3,15 @@ require('marko/express');                       // necessário para o marko trab
 
 const app = require('express')();               // importa o express
 const rotas = require('../app/rotas/rotas');    // importa as rotas
+const bodyParser = require('body-parser');      // importa o body-parser, necessário para manipular middlewares
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use('*', (req, res, next) => {
+    //console.log('olá');
+    next();
+});
 
 rotas(app);
+
 
 module.exports = app;
