@@ -22,7 +22,7 @@ const LIVROS_SCHEMA = `
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         titulo TEXT NOT NULL,
         preco INTEGER NOT NULL,
-        descricao TEXT DEFAULT ('') NOT NULL
+        descricao TEXT NOT NULL
     );
 `;
 
